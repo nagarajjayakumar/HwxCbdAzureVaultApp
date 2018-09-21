@@ -1,0 +1,182 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.hwx.cbd</groupId>
+    <artifactId>HwxCbdAzureVaultApp</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <name>HwxCbdAzureVaultApp</name>
+    <url>http://maven.apache.org</url>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+        <jasypt.version>1.9.2</jasypt.version>
+        <spring.version>3.0.2.RELEASE</spring.version>
+        <logback.version>1.0.1</logback.version>
+        <slf4j.version>1.6.4</slf4j.version>
+        <logback.contrib.version>0.1.5</logback.contrib.version>
+        <jackson.version>2.9.3</jackson.version>
+    </properties>
+
+
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.microsoft.azure</groupId>
+      <artifactId>azure</artifactId>
+      <version>1.7.0</version>
+        <exclusions>
+            <exclusion>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-simple</artifactId>
+            </exclusion>
+        </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>com.microsoft.azure</groupId>
+      <artifactId>azure-keyvault</artifactId>
+      <version>1.0.0</version>
+    </dependency>
+    <dependency>
+      <groupId>com.microsoft.azure</groupId>
+      <artifactId>adal4j</artifactId>
+      <version>1.2.0</version>
+    </dependency>
+    <dependency>
+      <groupId>com.microsoft.rest</groupId>
+      <artifactId>client-runtime</artifactId>
+      <version>1.0.0</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.bouncycastle/bcprov-jdk16
+    <dependency>
+      <groupId>org.bouncycastle</groupId>
+      <artifactId>bcprov-jdk16</artifactId>
+      <version>1.46</version>
+    </dependency> -->
+
+
+    <dependency>
+      <groupId>org.bouncycastle</groupId>
+      <artifactId>bcprov-jdk15on</artifactId>
+      <version>1.47</version>
+    </dependency>
+
+
+      <dependency>
+          <groupId>org.springframework</groupId>
+          <artifactId>spring-context</artifactId>
+            <version>${spring.version}</version>
+      </dependency>
+
+
+      <!--<dependency>-->
+          <!--<groupId>com.github.ulisesbocchio</groupId>-->
+          <!--<artifactId>jasypt-spring-boot-starter</artifactId>-->
+          <!--<version>${jasypt.version}</version>-->
+      <!--</dependency>-->
+
+      <!--<dependency>-->
+          <!--<groupId>com.github.ulisesbocchio</groupId>-->
+          <!--<artifactId>jasypt-spring-boot</artifactId>-->
+          <!--<version>${jasypt.version}</version>-->
+      <!--</dependency>-->
+
+      <dependency>
+          <groupId>org.jasypt</groupId>
+          <artifactId>jasypt</artifactId>
+          <version>${jasypt.version}</version>
+      </dependency>
+
+
+
+      <dependency>
+          <groupId>commons-configuration</groupId>
+          <artifactId>commons-configuration</artifactId>
+          <version>1.6</version>
+      </dependency>
+
+
+
+      <dependency>
+          <groupId>com.beust</groupId>
+          <artifactId>jcommander</artifactId>
+          <version>1.72</version>
+      </dependency>
+
+      <dependency>
+          <groupId>ch.qos.logback</groupId>
+          <artifactId>logback-classic</artifactId>
+          <version>${logback.version}</version>
+      </dependency>
+
+      <dependency>
+          <groupId>ch.qos.logback</groupId>
+          <artifactId>logback-core</artifactId>
+          <version>${logback.version}</version>
+      </dependency>
+
+
+      <dependency>
+          <groupId>org.slf4j</groupId>
+          <artifactId>slf4j-api</artifactId>
+          <version>${slf4j.version}</version>
+      </dependency>
+
+  </dependencies>
+
+
+    <build>
+
+
+        <plugins>
+
+
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.5.1</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+
+
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <mainClass>com.hortonworks.cbd.HwxCbdKeyVaultApp</mainClass>
+                        </manifest>
+                    </archive>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                </configuration>
+            </plugin>
+
+
+        </plugins>
+    </build>
+</project>
