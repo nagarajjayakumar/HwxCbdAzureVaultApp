@@ -1,5 +1,7 @@
 # KeyVault App - Cloudbreak Hortonworks
 
+## Azure KeyVault integration with Cloudbreak receipe
+
 Azure Vault integration using PFX authentication. 
 Gets the Value from Vault and pass to the Shell script dynamically and execute the script.
 
