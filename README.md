@@ -1,4 +1,4 @@
-# KeyVault App - Cloudbreak Hortonworks
+# KeyVault App - Cloudbreak 
 
 ## Azure KeyVault integration with Cloudbreak receipe
 
