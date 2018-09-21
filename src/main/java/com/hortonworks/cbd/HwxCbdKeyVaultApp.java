@@ -17,7 +17,9 @@ public class HwxCbdKeyVaultApp {
     private static Logger logger = LoggerFactory.getLogger(HwxCbdKeyVaultApp.class);
 
     /**
-     * Testing ONLY
+     * App takes 2 params
+     * -f Script file location
+     * -sk SecretKey for Azure vault
      * @param argv
      */
     public static void main(String[] argv)  {
