@@ -19,7 +19,7 @@ pathPfx=your_app_pfx_location
 App usage:
 
 ```
-/usr/java/default/bin/java -jar HwxCbdAzureVaultApp.jar  -f <ScriptFileName> -sk <VaultKeyCSV>
+/usr/java/default/bin/java -jar HwxCbdAzureVaultApp.jar  -f <ScriptFileNameWithFullPath> -sk <VaultKeyCSV>
 
 Options ::
 
