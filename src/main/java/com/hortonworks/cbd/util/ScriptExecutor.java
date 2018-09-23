@@ -26,7 +26,7 @@ public class ScriptExecutor {
                     awk.getInputStream()));
             String line;
             while((line = reader.readLine()) != null) {
-                logger.debug(line);
+                logger.info(line);
             }
         } catch (IOException e) {
             e.printStackTrace();
