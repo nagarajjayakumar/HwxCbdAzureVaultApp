@@ -18,16 +18,9 @@ public class ScriptExecutor {
             ProcessBuilder pb  = new ProcessBuilder("/bin/bash", scriptLocation);
             Map<String, String> env = pb.environment();
             env.putAll(environmentVariable);
-
-            Process awk = pb.start();
+            Process awk = pb.inheritIO().start();
             awk.waitFor();
-
-            BufferedReader reader=new BufferedReader(new InputStreamReader(
-                    awk.getInputStream()));
-            String line;
-            while((line = reader.readLine()) != null) {
-                logger.info(line);
-            }
+            awk.destroy();
         } catch (IOException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
