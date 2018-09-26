@@ -7,13 +7,13 @@ import java.util.List;
 
 public class Args {
 
-    @Parameter(names = { "--secretkeys", "-sk" }, description = "Vault Secret key ")
+    @Parameter(names = { "--secretkeys", "-s" }, description = "Vault Secret key ")
     public List<String> secretkey = new ArrayList<>();
 
     @Parameter(names = { "--file", "-f" }, description = "Script File Location", required=true)
     public String file;
 
-    @Parameter(names = { "--propertyfile", "-pf" }, description = "propertyfile for the Vault Secret Key")
+    @Parameter(names = { "--propertyfile", "-p" }, description = "propertyfile for the Vault Secret Key")
     public String propertyfile;
 
 
