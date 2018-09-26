@@ -74,6 +74,10 @@ public class HwxCbdKeyVaultApp {
 
     private static void getEnvFromVault(List<String> secrets, String vaultUrl, Map<String, String> env, KeyVaultClient kvClient) {
         for (String key : secrets) {
+            if(null == key){
+                continue;
+            }
+            key = key.trim();
             String secret = AzureVaultService.getSecretFromVault(kvClient, vaultUrl, key);
             env.put(key, secret);
         }
