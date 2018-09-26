@@ -3,14 +3,13 @@ package com.hortonworks.cbd;
 import com.beust.jcommander.JCommander;
 import com.hortonworks.cbd.model.Args;
 import com.hortonworks.cbd.util.EncryptDecrypt;
+import com.hortonworks.cbd.util.FileUtil;
 import com.hortonworks.cbd.util.ScriptExecutor;
 import com.microsoft.azure.keyvault.KeyVaultClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Properties;
+import java.util.*;
 
 public class HwxCbdKeyVaultApp {
 
@@ -31,7 +30,18 @@ public class HwxCbdKeyVaultApp {
                 .addObject(args)
                 .build()
                 .parse(argv);
-
+        /**
+         * Read the property file
+         */
+        List<String> keysFromPropertyFile = new ArrayList<>();
+        try {
+            if (null != args.propertyfile) {
+                keysFromPropertyFile = FileUtil.readPropertyFile(args.propertyfile);
+            }
+        }catch (Exception e) {
+                e.printStackTrace();
+                System.exit(-101);
+        }
 
         Properties props = null;
         try {
@@ -50,16 +60,22 @@ public class HwxCbdKeyVaultApp {
         try {
             KeyVaultClient kvClient = authenticator.getAuthentication(path, pfxPassword, clientId);
 
-            for (String key : args.secretkey) {
-                String secret = AzureVaultService.getSecretFromVault(kvClient, vaultUrl, key);
-                env.put(key, secret);
-            }
+            getEnvFromVault(keysFromPropertyFile,  vaultUrl, env, kvClient);
+            getEnvFromVault(args.secretkey, vaultUrl, env, kvClient);
+
             ScriptExecutor.executeScript(args.file, env);
             logger.debug("DONE");
             System.exit(0);
         }catch(Exception e){
             e.printStackTrace();
             System.exit(-404);
+        }
+    }
+
+    private static void getEnvFromVault(List<String> secrets, String vaultUrl, Map<String, String> env, KeyVaultClient kvClient) {
+        for (String key : secrets) {
+            String secret = AzureVaultService.getSecretFromVault(kvClient, vaultUrl, key);
+            env.put(key, secret);
         }
     }
 }
